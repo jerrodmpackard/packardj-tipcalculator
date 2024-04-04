@@ -7,7 +7,7 @@ import logo from '../../../images/logo.svg'
 const CalculatorComponent = () => {
 
     const [billAmount, setBillAmount] = useState<string>('');
-    const [tipPercentage, setTipPercentage] = useState<string>('0');
+    const [tipPercentage, setTipPercentage] = useState<string>('');
     const [peopleAmount, setPeopleAmount] = useState<string>('');
     const [tipAmount, setTipAmount] = useState<string>('0.00');
     const [totalAmount, setTotalAmount] = useState<string>('0.00');
@@ -43,7 +43,7 @@ const CalculatorComponent = () => {
     // helper function to handle resetting all values
     const handleReset = () => {
         setBillAmount('');
-        setTipPercentage('0');
+        setTipPercentage('');
         setPeopleAmount('');
         setTipAmount('0.00');
         setTotalAmount('0.00');
@@ -67,16 +67,16 @@ const CalculatorComponent = () => {
                         {/* Bill Input Field */}
                         <div className='grid grid-flow-row mb-10 lg:mb-11'>
                             <label className='mb-3  text-grayishCyan' htmlFor="bill">Bill</label>
-                            <div className='flex flex-row'>
-                                <img className='absolute ' src={dollarIcon.src} alt="dollar icon" />
-                                <input value={billAmount} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBillAmount(e.target.value)} name='bill' id='bill' className='text-2xl bg-veryLightGrayishCyan text-veryDarkCyan text-right h-12 cursor-pointer hover:border-strongCyan focus:outline-strongCyan hover:border-2 rounded-lg px-4' type="text" placeholder='0' />
+                            <div className='flex justify-between items-center bg-veryLightGrayishCyan hover:outline-strongCyan focus:outline-strongCyan hover:outline-2 rounded-lg px-4 cursor-pointer'>
+                                <img src={dollarIcon.src} alt="dollar icon" />
+                                <input value={billAmount} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBillAmount(e.target.value)} name='bill' id='bill' className='w-full bg-transparent text-2xl outline-none text-veryDarkCyan text-right h-12 cursor-pointer' type="text" placeholder='0' />
                             </div>
                         </div>
 
                         {/* Button field */}
                         <div className='grid grid-cols-2 lg:grid-cols-3 justify-center gap-4 mb-10 lg:mb-11'>
                             <h1 className='col-span-2 lg:col-span-3  text-grayishCyan'>Select Tip %</h1>
-                            <button onClick={() => handleTipPercentage('5')} className='bg-veryDarkCyan  text-white hover:bg-strongCyan hover:text-veryDarkCyan text-xl  h-12 rounded-lg '>5%</button>
+                            <button onClick={() => handleTipPercentage('5')} className='bg-veryDarkCyan  text-white hover:bg-strongCyan hover:text-veryDarkCyan active:bg-strongCyan active:text-veryDarkCyan text-xl  h-12 rounded-lg '>5%</button>
                             <button onClick={() => handleTipPercentage('10')} className='bg-veryDarkCyan text-white hover:bg-strongCyan hover:text-veryDarkCyan text-xl  h-12 rounded-lg '>10%</button>
                             <button onClick={() => handleTipPercentage('15')} className='bg-veryDarkCyan text-white hover:bg-strongCyan hover:text-veryDarkCyan text-xl  h-12 rounded-lg '>15%</button>
                             <button onClick={() => handleTipPercentage('25')} className='bg-veryDarkCyan text-white hover:bg-strongCyan hover:text-veryDarkCyan text-xl  h-12 rounded-lg '>25%</button>
@@ -87,8 +87,10 @@ const CalculatorComponent = () => {
                         {/* Number of People Input Field */}
                         <div className='grid grid-flow-row '>
                             <label className='lg:mb-2 text-grayishCyan' htmlFor="people">Number of People</label>
-                            {/* <img src={personIcon.src} alt="dollar icon" /> */}
-                            <input value={peopleAmount} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPeopleAmount(e.target.value)} name='people' id='people' className='text-2xl bg-veryLightGrayishCyan text-veryDarkCyan text-right h-12 hover:border-strongCyan focus:outline-strongCyan hover:border-2 rounded-lg px-4 cursor-pointer invalid:outline-orange-400' type="text" placeholder='1' />
+                            <div className='flex justify-between items-center bg-veryLightGrayishCyan hover:border-strongCyan focus:outline-strongCyan hover:border-2 rounded-lg px-4 cursor-pointer'>
+                                <img src={personIcon.src} alt="dollar icon" />
+                                <input value={peopleAmount} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPeopleAmount(e.target.value)} name='people' id='people' className='w-full bg-transparent text-2xl outline-none text-veryDarkCyan text-right h-12 cursor-pointer invalid:outline-orange-400' type="text" placeholder='1' />
+                            </div>
                         </div>
                     </div>
 
@@ -121,7 +123,7 @@ const CalculatorComponent = () => {
 
                             {/* Reset Button */}
                             <div className=' col-span-2'>
-                                <button onClick={handleReset} className='w-full bg-resetBackground text-veryDarkCyan hover:bg-buttonBackground hover:text-veryDarkCyan text-xl h-12 rounded-lg '>RESET</button>
+                                <button onClick={handleReset} className={`w-full ${billAmount == '' && tipPercentage == '' && peopleAmount == '' ? 'bg-resetBackground' : 'bg-buttonBackground'}  text-veryDarkCyan hover:bg-buttonBackground hover:text-veryDarkCyan text-xl h-12 rounded-lg `}>RESET</button>
                             </div>
                         </div>
                     </div>
