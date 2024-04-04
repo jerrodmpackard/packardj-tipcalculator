@@ -30,6 +30,11 @@ const CalculatorComponent = () => {
             setTipAmount(calculateTipAmount());
             setTotalAmount(calculateTotalAmount());
         }
+
+        const people = document.getElementById('people') as HTMLInputElement;
+        if (people.value === '0') {
+            people.className = '';
+        }
     }, [billAmount, tipPercentage, peopleAmount]);
 
 
@@ -47,6 +52,13 @@ const CalculatorComponent = () => {
         setPeopleAmount('');
         setTipAmount('0.00');
         setTotalAmount('0.00');
+
+        const customTip = document.getElementById('customTip') as HTMLInputElement;
+
+        if (customTip) {
+            customTip.value = '';
+            customTip.placeholder = 'Custom';
+        }
     }
 
 
@@ -67,7 +79,7 @@ const CalculatorComponent = () => {
                         {/* Bill Input Field */}
                         <div className='grid grid-flow-row mb-10 lg:mb-11'>
                             <label className='mb-3  text-grayishCyan' htmlFor="bill">Bill</label>
-                            <div className='flex justify-between items-center bg-veryLightGrayishCyan hover:outline-strongCyan focus:outline-strongCyan hover:outline-2 rounded-lg px-4 cursor-pointer'>
+                            <div className='flex justify-between items-center bg-veryLightGrayishCyan hover:border-strongCyan focus:outline-strongCyan hover:border-2 rounded-lg px-4 cursor-pointer'>
                                 <img src={dollarIcon.src} alt="dollar icon" />
                                 <input value={billAmount} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBillAmount(e.target.value)} name='bill' id='bill' className='w-full bg-transparent text-2xl outline-none text-veryDarkCyan text-right h-12 cursor-pointer' type="text" placeholder='0' />
                             </div>
@@ -81,7 +93,7 @@ const CalculatorComponent = () => {
                             <button onClick={() => handleTipPercentage('15')} className='bg-veryDarkCyan text-white hover:bg-strongCyan hover:text-veryDarkCyan text-xl  h-12 rounded-lg '>15%</button>
                             <button onClick={() => handleTipPercentage('25')} className='bg-veryDarkCyan text-white hover:bg-strongCyan hover:text-veryDarkCyan text-xl  h-12 rounded-lg '>25%</button>
                             <button onClick={() => handleTipPercentage('50')} className='bg-veryDarkCyan text-white hover:bg-strongCyan hover:text-veryDarkCyan text-xl  h-12 rounded-lg '>50%</button>
-                            <input onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleTipPercentage(e.target.value)} name='customTip' id='customTip' className='text-2xl bg-veryLightGrayishCyan text-veryDarkCyan text-right hover:border-strongCyan focus:outline-strongCyan hover:border-2  px-4 rounded-lg cursor-pointer' type="text" placeholder='Custom' />
+                            <input onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleTipPercentage(e.target.value)} name='customTip' id='customTip' className='text-2xl bg-veryLightGrayishCyan text-veryDarkCyan text-right hover:border-strongCyan focus:outline-strongCyan hover:border-2  px-4 rounded-lg cursor-pointer' type="text" placeholder={tipPercentage === '0' || '5' || '10' || '25' || '50' ? 'Custom' : ''} />
                         </div>
 
                         {/* Number of People Input Field */}
