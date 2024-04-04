@@ -11,6 +11,7 @@ const CalculatorComponent = () => {
     const [peopleAmount, setPeopleAmount] = useState<string>('');
     const [tipAmount, setTipAmount] = useState<string>('0.00');
     const [totalAmount, setTotalAmount] = useState<string>('0.00');
+    const [errorClass, setErrorClass] = useState<string>('');
 
 
     // useEffect to handle calculations
@@ -31,9 +32,8 @@ const CalculatorComponent = () => {
             setTotalAmount(calculateTotalAmount());
         }
 
-        const people = document.getElementById('people') as HTMLInputElement;
-        if (people.value === '0') {
-            people.className = '';
+        if (peopleAmount === '0') {
+            
         }
     }, [billAmount, tipPercentage, peopleAmount]);
 
